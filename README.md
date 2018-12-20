@@ -11,7 +11,7 @@ npm install @mathewparet/vue-filter-box
 ## Global Initialization
 
 ``` js
-import Vue from 'vue;
+import Vue from 'vue';
 import FilterBox from '@mathewparet/vue-filter-box';
 Vue.use(FilterBox);
 ```
