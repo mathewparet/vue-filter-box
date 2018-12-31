@@ -1,5 +1,5 @@
 <template>
-    <input type="search" @input="filterList" v-model="searchString" :placeholder="'Min '+this.min+' letters'">
+    <input type="search" @input="filterList" :value="this.value" :placeholder="'Min '+this.min+' letters'">
 </template>
 <script>
     let filterBox = {
@@ -14,6 +14,9 @@
                 validator(value) {
                     return value > 0;
                 }
+            },
+            value: {
+                required: false,
             }
         },
         data() {
@@ -22,8 +25,19 @@
                 timer: null,
             };
         },
+        watch: {
+            value: {
+                handler()
+                {
+                    this.searchString = this.value;
+                    this.filterList();
+                },
+                immediate: true,
+            }
+        },
         methods: {
-            filterList() {
+            filterList(e=null) {
+                if(e) this.searchString = e.target.value;
                 clearTimeout(this.timer);
                 this.timer = setTimeout(this.callFilterCallback, 1000);
             },
