@@ -1,7 +1,7 @@
 {
   "name": "@mathewparet/vue-filter-box",
   "description": "A Vue.Js filter box to initiate search based on filter.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Mathew Paret <mathewparet@gmail.com>",
   "license": "MIT",
   "scripts": {

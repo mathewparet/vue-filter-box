@@ -21,7 +21,6 @@
         },
         data() {
             return {
-                searchString: '',
                 timer: null,
             };
         },
@@ -29,23 +28,29 @@
             value: {
                 handler()
                 {
-                    this.searchString = this.value;
-                    this.filterList();
+                    if(this.value.length >= this.min || this.value.length === 0)
+                        this.$emit('filter',this.value);
                 },
                 immediate: true,
             }
         },
         methods: {
-            filterList(e=null) {
-                if(e) this.searchString = e.target.value;
-                clearTimeout(this.timer);
-                this.timer = setTimeout(this.callFilterCallback, 1000);
-            },
-            callFilterCallback() {
-                if(this.searchString.length >= this.min || this.searchString.length == 0)
+            filterList(e) 
+            {
+                if(e.target.value.length === 0)
+                    this.callFilterCallback();
+                else if(e.target.value.length >= this.min)
                 {
-                    this.$emit('input',this.searchString);
-                    this.$emit('filter',this.searchString);
+                    if(this.timer)
+                        clearTimeout(this.timer);
+                    this.timer = setTimeout(this.callFilterCallback, 1000, e.target.value);
+                }
+            },
+            callFilterCallback(value='') 
+            {
+                if(value.length >= this.min || value.length == 0)
+                {
+                    this.$emit('input',value);
                 }
             }
         },
