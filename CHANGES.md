@@ -4,3 +4,4 @@ All notable changes will be documented in this file. However you will find the c
 
 ## 1.0.4
 - Fixed issue where ```filter``` event was being called multiple times.
+- Removed babel and weboack support. For now we are concentrating ```vue``` only use.
